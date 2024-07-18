@@ -1,4 +1,5 @@
 import streamlit as st
+import openai
 from openai import OpenAI
 import pandas as pd
 from llama_index.core import VectorStoreIndex, Document, StorageContext, load_index_from_storage
@@ -6,7 +7,11 @@ from llama_index.llms.openai import OpenAI
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core import Settings
 
-client = OpenAI(api_key=st.secrets["openai"]["api_key"])
+
+
+# Access OpenAI API key from Streamlit secrets
+openai.api_key = st.secrets["secrets"]["OPENAI_API_KEY"]
+client = OpenAI(api_key= st.secrets["secrets"]["OPENAI_API_KEY"])
 
 # Set LLM and embedding models
 Settings.llm = OpenAI(model="gpt-4o")
@@ -105,7 +110,7 @@ if "messages" not in st.session_state:
 @st.cache_data(show_spinner=False)
 def load_data():
     docs = []
-    knowledge_center = pd.read_csv("data/knowledge_center.csv")
+    knowledge_center = pd.read_csv("AI_chat/data/knowledge_center.csv")
     for _, row in knowledge_center.iterrows():
         docs.append(Document(
             text=row['semanticsearch'],
