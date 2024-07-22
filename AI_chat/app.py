@@ -1,13 +1,11 @@
 import streamlit as st
-import openai
+import openai 
 from openai import OpenAI
 import pandas as pd
 from llama_index.core import VectorStoreIndex, Document, StorageContext, load_index_from_storage
 from llama_index.llms.openai import OpenAI
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core import Settings
-
-
 
 # Access OpenAI API key from Streamlit secrets
 openai.api_key = st.secrets["secrets"]["OPENAI_API_KEY"]
@@ -112,8 +110,9 @@ def load_data():
     docs = []
     knowledge_center = pd.read_csv("AI_chat/data/knowledge_center.csv")
     for _, row in knowledge_center.iterrows():
+        combined_text = f"{row['semanticsearch']} {row['TAGS']}"
         docs.append(Document(
-            text=row['semanticsearch'],
+            text=combined_text,
             doc_id=row['id'],
         ))
     index = VectorStoreIndex.from_documents(docs)
@@ -133,8 +132,8 @@ if "chat_engine" not in st.session_state:
 
 # Function to perform semantic search in the knowledge file
 def check_knowledge_center(question):
+    st.session_state.chat_engine.reset() 
     response = st.session_state.chat_engine.chat(question)
-    print("check_knowledge_center")
     print(response.response)
     return response.response
 
@@ -153,62 +152,13 @@ def generate_response(prompt):
         st.error(f"Error: {e}")
         return None
 
-# Display the chat history
-# for message in st.session_state.messages:
 
-    # if message["role"] == "user":
-    #     st.markdown(f"""
-    #         <div class="message-container user">
-    #             <div class="user-message">
-    #                 {message['content']}
-    #             </div>
-    #               <img src="https://via.placeholder.com/40?text=U" alt="User" width="40" height="40">
-    #         </div>
-    #     """, unsafe_allow_html=True)
-    # else:
-    #     st.markdown(f"""
-    #         <div class="message-container assistant">
-    #             <img src="https://via.placeholder.com/40?text=R" alt="Assistant" width="40" height="40">
-    #             <div class="assistant-message">
-    #                 {message['content']}
-    #             </div>
-    #         </div>
-    #     """, unsafe_allow_html=True)
     
 # Display the chat history
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.write(message["content"])
         
-# Create a form for input and submission
-# with st.form(key='my_form', clear_on_submit=True):
-
-#     prompt = st.text_input("Hidden Prompt", "",placeholder="השאלה שלך ..", label_visibility='collapsed',key="chat-input")
-#     submit_button = st.form_submit_button(label='')
-
-# if submit_button and prompt:
-#     # Add user's message to chat history
-#     st.session_state.messages.append({"role": "user", "content": prompt})
-
-#     # Show spinner while processing
-#     with st.spinner("Thinking..."):
-#         # Check for the answer in the knowledge center
-#         answer = check_knowledge_center(prompt)
-#         if answer:
-#             # Add the found answer to the chat history
-#             st.session_state.messages.append({"role": "assistant", "content": answer})
-#         else:
-#             # Generate OpenAI's response
-#             response = generate_response(prompt)
-#             if response:
-#                 # Add OpenAI's response to chat history
-#                 st.session_state.messages.append({"role": "assistant", "content": response})
-
-#     # Rerun to display updated messages
-#     st.rerun()
-
-
-
 
 # Prompt for user input and save to chat history
 prompt = st.chat_input("השאלה שלך...", key="chat-input")
