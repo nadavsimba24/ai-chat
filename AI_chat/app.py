@@ -47,8 +47,9 @@ st.markdown(
     .chat-container {
         display: flex;
         flex-direction: column;
-        height: 30vh;
-        justify-content: space-between;
+        height: 50vh; /* הגדלת גובה הקונטיינר */
+        justify-content: flex-start; /* מרחק מהתחתית */
+        margin-bottom: 20px; /* מרווח מתחתית העמוד */
     }
     .chat-input {
         position: sticky;
@@ -100,7 +101,7 @@ if "messages" not in st.session_state:
     st.session_state.messages = [
         {
             "role": "assistant",
-            "content": "לדוגמא: שאלות על תברים ",
+            "content": "לדוגמא: שאלות על תברים",
         }
     ]
 
