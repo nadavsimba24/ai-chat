@@ -82,7 +82,7 @@ st.markdown(
         background-color: #FF6347; /* צבע אדום */
         padding: 5px;
         border-radius: 10px;
-        margin-bottom: 5px;
+        margin-bottom: 50px;
     }
     </style>
     """,
