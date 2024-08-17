@@ -55,14 +55,14 @@ st.markdown(
         height: 70vh; /* גובה מתאים כדי למקם באמצע הדף */
         display: flex;
         flex-direction: column;
-        justify-content: center; /* ממרכז את הקונטיינר באמצע הדף */
+        justify-content:flex-start; /* ממרכז את הקונטיינר באמצע הדף */
     }
     .chat-container {
         display: flex;
         flex-direction: column;
         height: 50vh;
         justify-content: flex-start;
-        margin-bottom: 10px;
+        margin-bottom: 40px;
     }
     .chat-input {
         background: white;
