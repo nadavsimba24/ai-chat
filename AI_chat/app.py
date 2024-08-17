@@ -31,7 +31,14 @@ st.markdown(
         direction: rtl;
         text-align: right;
         background-color: #FFFAF0;
-        overflow-y: hidden; /* מונע גלילה אנכית */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .stApp {
+        max-width: 700px; /* כדי להגביל את רוחב האפליקציה */
     }
     .stAlert, .stButton button, .stTextInput div, .stTextArea div, .stMarkdown,
     .stRadio div, .stCheckbox div, .stSelectbox div, .stMultiselect div, 
@@ -41,41 +48,41 @@ st.markdown(
     }
     h1 {
         color: #FF4500; /* צבע כתום */
-        font-size: 18px; /* פונטים קטנים יותר */
+        font-size: 18px;
     }
     .main > div {
         padding-top: 0 !important;
-        max-height: 90vh; /* מגביל את גובה התצוגה הכוללת */
-        overflow-y: auto; /* מאפשר גלילה פנימית */
+        height: 70vh; /* גובה מתאים כדי למקם באמצע הדף */
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* ממרכז את הקונטיינר באמצע הדף */
     }
     .chat-container {
         display: flex;
         flex-direction: column;
-        height: 35vh; /* גובה קטן יותר כדי להימנע מגלילה */
+        height: 50vh;
         justify-content: flex-start;
         margin-bottom: 10px;
     }
     .chat-input {
-        position: sticky;
-        bottom: 0;
         background: white;
-        padding: 5px; /* צמצום הפדינג */
+        padding: 5px;
     }
     .user-message {
         text-align: right;
         color:black;
         background-color: #FFA07A; /* צבע כתום בהיר */
-        padding: 5px; /* צמצום הפדינג */
+        padding: 5px;
         border-radius: 10px;
-        margin-bottom: 5px; /* מרווחים קטנים יותר */
+        margin-bottom: 5px;
     }
     .assistant-message {
         text-align: left;
         color:black;
         background-color: #FF6347; /* צבע אדום */
-        padding: 5px; /* צמצום הפדינג */
+        padding: 5px;
         border-radius: 10px;
-        margin-bottom: 5px; /* מרווחים קטנים יותר */
+        margin-bottom: 5px;
     }
     </style>
     """,
