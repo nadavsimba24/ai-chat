@@ -31,6 +31,7 @@ st.markdown(
         direction: rtl;
         text-align: right;
         background-color: #FFFAF0;
+        overflow-y: hidden; /* מונע גלילה אנכית */
     }
     .stAlert, .stButton button, .stTextInput div, .stTextArea div, .stMarkdown,
     .stRadio div, .stCheckbox div, .stSelectbox div, .stMultiselect div, 
@@ -40,53 +41,41 @@ st.markdown(
     }
     h1 {
         color: #FF4500; /* צבע כתום */
+        font-size: 18px; /* פונטים קטנים יותר */
     }
     .main > div {
         padding-top: 0 !important;
+        max-height: 90vh; /* מגביל את גובה התצוגה הכוללת */
+        overflow-y: auto; /* מאפשר גלילה פנימית */
     }
     .chat-container {
         display: flex;
         flex-direction: column;
-        height: 50vh; /* הגדלת גובה הקונטיינר */
-        justify-content: flex-start; /* מרחק מהתחתית */
-        margin-bottom: 20px; /* מרווח מתחתית העמוד */
+        height: 35vh; /* גובה קטן יותר כדי להימנע מגלילה */
+        justify-content: flex-start;
+        margin-bottom: 10px;
     }
     .chat-input {
         position: sticky;
         bottom: 0;
         background: white;
-        padding: 10px;
+        padding: 5px; /* צמצום הפדינג */
     }
     .user-message {
         text-align: right;
         color:black;
         background-color: #FFA07A; /* צבע כתום בהיר */
-        padding: 10px;
+        padding: 5px; /* צמצום הפדינג */
         border-radius: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 5px; /* מרווחים קטנים יותר */
     }
     .assistant-message {
         text-align: left;
         color:black;
         background-color: #FF6347; /* צבע אדום */
-        padding: 10px;
+        padding: 5px; /* צמצום הפדינג */
         border-radius: 10px;
-        margin-bottom: 10px;
-    }
-    .message-container {
-        display: flex;
-        align-items: flex-end;
-        margin-bottom: 10px;
-    }
-    .message-container img {
-        border-radius: 50%;
-        margin: 0 10px;
-    }
-    .message-container.user {
-        justify-content: flex-end;
-    }
-    .message-container.assistant {
-        justify-content: flex-start;
+        margin-bottom: 5px; /* מרווחים קטנים יותר */
     }
     </style>
     """,
