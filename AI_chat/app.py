@@ -17,7 +17,7 @@ Settings.embed_model = OpenAIEmbedding(model="text-embedding-ada-002")
 
 # Set page configuration
 st.set_page_config(
-    page_title="AI Chat",
+    page_title="מטרופולינט AI",
     page_icon="🤖",
     layout="centered",
     initial_sidebar_state="auto",
@@ -30,7 +30,7 @@ st.markdown(
     body {
         direction: rtl;
         text-align: right;
-        background-color: white;
+        background-color: #FFFAF0;
     }
     .stAlert, .stButton button, .stTextInput div, .stTextArea div, .stMarkdown,
     .stRadio div, .stCheckbox div, .stSelectbox div, .stMultiselect div, 
@@ -39,7 +39,7 @@ st.markdown(
         text-align: right;
     }
     h1 {
-        font-size: 12px;
+        color: #FF4500; /* צבע כתום */
     }
     .main > div {
         padding-top: 0 !important;
@@ -47,7 +47,7 @@ st.markdown(
     .chat-container {
         display: flex;
         flex-direction: column;
-        height: 30vh; /* Adjust this value as needed */
+        height: 30vh;
         justify-content: space-between;
     }
     .chat-input {
@@ -59,7 +59,7 @@ st.markdown(
     .user-message {
         text-align: right;
         color:black;
-        background-color: #DCF8C6;
+        background-color: #FFA07A; /* צבע כתום בהיר */
         padding: 10px;
         border-radius: 10px;
         margin-bottom: 10px;
@@ -67,7 +67,7 @@ st.markdown(
     .assistant-message {
         text-align: left;
         color:black;
-        background-color: #F1F0F0;
+        background-color: #FF6347; /* צבע אדום */
         padding: 10px;
         border-radius: 10px;
         margin-bottom: 10px;
@@ -92,7 +92,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.title("OpenAI and Streamlit Integration")
+st.title("מטרופולינט AI 🤖🗨️")
 st.info("שאל אותי הכל!")
 
 # Initialize chat messages history
@@ -100,7 +100,7 @@ if "messages" not in st.session_state:
     st.session_state.messages = [
         {
             "role": "assistant",
-            "content": "לדוגמא: שאלות על השכונה שלי ",
+            "content": "לדוגמא: שאלות על השכונה שלי",
         }
     ]
 
@@ -121,8 +121,6 @@ def load_data():
     return index
 
 index = load_data()
-
-# st.markdown("<div class='chat-container'>", unsafe_allow_html=True)
 
 # Initialize the chat engine
 if "chat_engine" not in st.session_state:
@@ -145,20 +143,15 @@ def generate_response(prompt):
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": prompt}
         ])
-        print("generate_response")
-        print(response.choices[0].message.content.strip())
         return response.choices[0].message.content.strip()
     except Exception as e:
         st.error(f"Error: {e}")
         return None
 
-
-    
 # Display the chat history
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.write(message["content"])
-        
 
 # Prompt for user input and save to chat history
 prompt = st.chat_input("השאלה שלך...", key="chat-input")
@@ -170,20 +163,13 @@ if prompt:
         
     # Generate a new response
     with st.chat_message("assistant"):
-        with st.spinner("Thinking..."):
+        with st.spinner("חושב..."):
             answer = check_knowledge_center(prompt)
         if answer:
-            # Add the found answer to the chat history
             st.write(answer)
             st.session_state.messages.append({"role": "assistant", "content": answer})
         else:
-            # Generate OpenAI's response
             response = generate_response(prompt)
             if response:
-                # Add OpenAI's response to chat history
                 st.write(response)
                 st.session_state.messages.append({"role": "assistant", "content": response})
-
-            
-
-st.markdown("</div>", unsafe_allow_html=True)
