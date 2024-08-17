@@ -38,7 +38,7 @@ st.markdown(
         margin: 0;
     }
     .stApp {
-        max-width: 700px; /* כדי להגביל את רוחב האפליקציה */
+        max-width: 1000px; /* כדי להגביל את רוחב האפליקציה */
     }
     .stAlert, .stButton button, .stTextInput div, .stTextArea div, .stMarkdown,
     .stRadio div, .stCheckbox div, .stSelectbox div, .stMultiselect div, 
